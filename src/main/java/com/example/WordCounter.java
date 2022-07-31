@@ -1,10 +1,7 @@
 package com.example;
 
-public class WordCounter {
+public interface WordCounter {
 
-    public int count(String text) {
-        String[] words = text.split(" ");
-        return words.length;
-    }
+    int count(String text);
  
 }
