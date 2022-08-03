@@ -4,8 +4,8 @@ import java.io.File;
 
 public class App {
 
-    public static void main(String[] args) {
-        InputHandler inputHandler = new CommandlineInputHandler();
+    public static void main(String[] args) throws GetUserInputFailedException {
+        InputHandler inputHandler = args.length == 0 ? new CommandlineInputHandler() : new TextfileInputHandler(new File(args[0]));
         Messenger messenger = new ConsoleMessenger();
 
         WordCounter wordCounter = null;

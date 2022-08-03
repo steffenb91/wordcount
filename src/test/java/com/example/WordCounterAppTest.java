@@ -28,7 +28,7 @@ public class WordCounterAppTest {
 		this.wordCounterApp = new WordCounterApp(inputHandler, messenger, wordCounter);
 	}
 	@Test
-	public void shouldRun() {
+	public void shouldRun() throws GetUserInputFailedException {
 		String userInput = "A simple test";
 		when(inputHandler.getUserInput()).thenReturn(userInput);
 		wordCounterApp.run();

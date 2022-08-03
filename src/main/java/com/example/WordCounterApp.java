@@ -12,7 +12,7 @@ public class WordCounterApp {
         this.wordCounter = wordCounter;
     }
 
-    public void run() {
+    public void run() throws GetUserInputFailedException {
         messenger.print("Enter text: ");
         int wordCount = wordCounter.count(inputHandler.getUserInput());
         messenger.print(String.format("Number of words: %s", wordCount));
