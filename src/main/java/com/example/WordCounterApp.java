@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Collection;
+
 public class WordCounterApp {
 
     private InputHandler inputHandler;
@@ -14,8 +16,11 @@ public class WordCounterApp {
 
     public void run() throws GetUserInputFailedException {
         messenger.print("Enter text: ");
-        int wordCount = wordCounter.count(inputHandler.getUserInput());
-        messenger.print(String.format("Number of words: %s", wordCount));
+        Collection<WordCountResult> wordCount = wordCounter.count(inputHandler.getUserInput());
+        for (WordCountResult wordCountResult : wordCount) {
+            messenger.print(wordCountResult.getResult());    
+        }
+        
     }
 
 }

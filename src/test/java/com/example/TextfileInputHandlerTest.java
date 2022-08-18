@@ -19,7 +19,7 @@ class TextfileInputHandlerTest {
 	public void shouldGetUserInput() throws GetUserInputFailedException {
 		TextfileInputHandler textfileInputHandler = new TextfileInputHandler(inputFile);
 		String actualValue = textfileInputHandler.getUserInput();
-		assertThat(actualValue, is("Mary had a little lamb"));
+		assertThat(actualValue, is("Mary had a little lamb."));
 	}
 
 	@Test

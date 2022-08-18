@@ -9,21 +9,23 @@ public class App {
         Messenger messenger = new ConsoleMessenger();
 
         WordCounter wordCounter = null;
+        WordFilter stopWordFilter = null;
         try {
-            wordCounter = getWordCounterWithStopwordFilter();
+            stopWordFilter = getStopwordFilter();
+            WordRecognition wordRecognition = new WordRecognition().withFilter(stopWordFilter);
+            wordCounter =  new ObservableWordCounter(wordRecognition, new UniqueWordCounter());
         } catch (StopWordListReadFailedException e) {
             System.out.println("Failed to read stopword list, continuing without stopword list...");
-            wordCounter = new TotalWordsCounter();
+            wordCounter = new ObservableWordCounter(new WordRecognition(), new UniqueWordCounter());
         }
         WordCounterApp wordCounterApp = new WordCounterApp(inputHandler, messenger, wordCounter);
         wordCounterApp.run();
     }
 
-    private static WordCounter getWordCounterWithStopwordFilter()
+    private static WordFilter getStopwordFilter()
             throws StopWordListReadFailedException {
         File stopwordList = new File("src/main/resources/stopwords.txt");
         StopWordReader stopWordReader = new TextfileStopWordReader(stopwordList);
-        WordFilter stopWordFilter = new StopwordFilter(stopWordReader.getStopwords());
-        return new FilteringWordCounter(stopWordFilter);
+        return new StopwordFilter(stopWordReader.getStopwords());
     }
 }

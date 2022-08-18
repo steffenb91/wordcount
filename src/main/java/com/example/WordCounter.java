@@ -1,7 +1,8 @@
 package com.example;
 
+import java.util.Collection;
+
 public interface WordCounter {
 
-    int count(String text);
- 
+    Collection<WordCountResult> count(String text);
 }

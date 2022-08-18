@@ -19,7 +19,7 @@ public class WordCounterAppTest {
 	@Mock
 	private Messenger messenger;
 	@Mock
-	private WordCounter wordCounter;
+	private SimpleWordCounter wordCounter;
 
 	private WordCounterApp wordCounterApp;
 
@@ -32,7 +32,7 @@ public class WordCounterAppTest {
 		String userInput = "A simple test";
 		when(inputHandler.getUserInput()).thenReturn(userInput);
 		wordCounterApp.run();
-		verify(messenger, times(2)).print(anyString());
+		verify(messenger, times(1)).print(anyString());
 		verify(inputHandler).getUserInput();
 		verify(wordCounter).count(userInput);
 	}
