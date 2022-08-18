@@ -5,15 +5,15 @@ import java.util.Objects;
 public class WordCountResult {
 
     private String message;
-    private int wordCount;
+    private double result;
 
-    public WordCountResult(String message, int wordCount) {
+    public WordCountResult(String message, double result) {
         this.message = message;
-        this.wordCount = wordCount;
+        this.result = result;
     }
 
     String getResult() {
-        return String.format("%s: %s", message, wordCount);
+        return String.format("%s: %s", message, result);
     }
 
 
@@ -25,12 +25,12 @@ public class WordCountResult {
             return false;
         }
         WordCountResult wordCountResult = (WordCountResult) o;
-        return Objects.equals(message, wordCountResult.message) && wordCount == wordCountResult.wordCount;
+        return Objects.equals(message, wordCountResult.message) && result == wordCountResult.result;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(message, wordCount);
+        return Objects.hash(message, result);
     }
 
 }
