@@ -10,7 +10,8 @@ public class WordRecognition {
     private List<WordFilter> filters = new ArrayList<>();
     
     public Collection<String> recognizeWords(String text) {
-        Collection<String> words = Arrays.asList(text.split(" ")); 
+        String sanitizedText = text.replace(".", "").replace(",", "");
+        Collection<String> words = Arrays.asList(sanitizedText.split(" ")); 
         for (WordFilter filter : filters) {
             words = filter.filter(words);
         }

@@ -1,6 +1,7 @@
 package com.example;
 
 import java.io.File;
+import java.util.List;
 
 public class App {
 
@@ -11,18 +12,25 @@ public class App {
 
         WordCounter wordCounter = null;
         WordFilter stopWordFilter = null;
+        WordRecognition wordRecognition = null;
         try {
             stopWordFilter = getStopwordFilter();
-            WordRecognition wordRecognition = new WordRecognition().withFilter(stopWordFilter);
+            wordRecognition = new WordRecognition().withFilter(stopWordFilter);
             wordCounter = new ObservableWordCounter(wordRecognition, new UniqueWordCounter(),
                     new AverageWordLengthCalculator());
         } catch (StopWordListReadFailedException e) {
             System.out.println("Failed to read stopword list, continuing without stopword list...");
-            wordCounter = new ObservableWordCounter(new WordRecognition(), new UniqueWordCounter(),
+            wordRecognition = new WordRecognition();
+            wordCounter = new ObservableWordCounter(wordRecognition, new UniqueWordCounter(),
                     new AverageWordLengthCalculator());
         }
         WordCounterApp wordCounterApp = new WordCounterApp(inputHandler, messenger, wordCounter);
         wordCounterApp.run();
+        List<String> inputArguments = List.of(args);
+        if(inputArguments.contains("-index")){
+            new IndexPrinter(wordRecognition, messenger).printIndex(inputHandler.getUserInput());
+        }
+        
     }
 
     private static WordFilter getStopwordFilter()
